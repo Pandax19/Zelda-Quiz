@@ -1,0 +1,21 @@
+.hs {
+position:absolute;
+top: 12px;
+left: 12px;
+}
+
+.time {
+    position:absolute;
+    top: 12px;
+    right: 12px;
+    }
+
+.container {
+    margin: 120px auto 0 auto;
+    max-width: 600px;
+
+}
+.start-div {
+    text-align: center;
+
+}
