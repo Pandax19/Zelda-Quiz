@@ -61,7 +61,14 @@ let timeEl= document.getElementById("time");
 startButton.addEventListener("click", startQuiz);
 
 function startQuiz(){
+    console.log("startQuiz")
     // start  timer 
     timerId= setInterval(timerFunc, 1000);
-    timerEl.textContent=`TimeLeft: ${timeLeft}`;
+    timeEl.textContent=`TimeLeft: ${timeLeft}`;
+}
+
+function timerFunc(){
+    timeLeft--;
+    timeEl.textContent=`TimeLeft: ${timeLeft}`;
+
 }
