@@ -19,5 +19,9 @@ left: 12px;
 }
 .hide {
     display: none;
+
+}
+.choices-div button {
+    display: block;
     
 }
