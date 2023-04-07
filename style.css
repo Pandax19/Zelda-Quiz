@@ -13,9 +13,11 @@ left: 12px;
 .container {
     margin: 120px auto 0 auto;
     max-width: 600px;
-
 }
 .start-div {
     text-align: center;
-
+}
+.hide {
+    display: none;
+    
 }
