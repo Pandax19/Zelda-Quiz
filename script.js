@@ -58,6 +58,9 @@ let currentIndex= 0;
 
 let startButton= document.getElementById("start-btn");
 let timeEl= document.getElementById("time");
+let startDiv= document.getElementById("start-div");
+let questionsDiv= document.getElementById("questions-div");
+let choicesDiv= document.getElementById("choices-div");
 startButton.addEventListener("click", startQuiz);
 
 function startQuiz(){
@@ -65,6 +68,28 @@ function startQuiz(){
     // start  timer 
     timerId= setInterval(timerFunc, 1000);
     timeEl.textContent=`TimeLeft: ${timeLeft}`;
+    startDiv.setAttribute("class", "hide");
+    questionsDiv.removeAttribute("class");
+    showQuestion();
+
+}
+
+function showQuestion(){
+    let currentQuestion= questions[currentIndex];
+    let questionEl= document.getElementById("question");
+    questionEl.textContent= currentQuestion.question;
+
+    choicesDiv.innerHTML= "";
+
+    for (let i = 0; i < currentQuestion.answers.length; i++){
+        let answer= currentQuestion.answers[i];
+        let answerBtn= document.createElement("button");
+        answerBtn.setAttribute("class", "answer");
+        answerBtn.setAttribute("value", answer);
+        answerBtn.textContent= i + 1 + " . " + answer;
+        choicesDiv.appendChild(answerBtn);
+
+    }
 }
 
 function timerFunc(){
