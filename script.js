@@ -51,6 +51,8 @@ let questions= [
     },
 ];
 
+
+
 let timerId;
 let timeLeft= 150;
 let currentIndex= 0;
@@ -59,9 +61,11 @@ let currentIndex= 0;
 let startButton= document.getElementById("start-btn");
 let timeEl= document.getElementById("time");
 let startDiv= document.getElementById("start-div");
+
 let questionsDiv= document.getElementById("questions-div");
 let choicesDiv= document.getElementById("choices-div");
 startButton.addEventListener("click", startQuiz);
+choicesDiv.onclick= handleAnswerChoice;
 
 function startQuiz(){
     console.log("startQuiz")
@@ -72,6 +76,39 @@ function startQuiz(){
     questionsDiv.removeAttribute("class");
     showQuestion();
 
+}
+
+function endQuiz(){
+    // To be completed
+}
+
+function handleAnswerChoice(event){
+    console.log ("answerChoice")
+    let button= event.target;
+
+    if (button.matches("answer")){
+        return;
+    }
+    console.log ("answerChoice1")
+
+    if (button.value !== questions[currentIndex].correctAnswer){
+        timeLeft-= 10;
+        if(timeLeft < 0){
+            timeLeft = 0;
+        }
+
+        timeEl.textContent=`TimeLeft: ${timeLeft}`;
+        alert("incorrectAnswer")
+    } else {
+        alert("correctAnswer")
+    }
+    currentIndex++; 
+
+    if (timeLeft <= 0 || currentIndex === questions.length){
+        endQuiz();
+    } else {
+        showQuestion();
+    }
 }
 
 function showQuestion(){
