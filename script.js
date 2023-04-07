@@ -50,3 +50,18 @@ let questions= [
         correctAnswer: "answer 3",
     },
 ];
+
+let timerId;
+let timeLeft= 150;
+let currentIndex= 0;
+
+
+let startButton= document.getElementById("start-btn");
+let timeEl= document.getElementById("time");
+startButton.addEventListener("click", startQuiz);
+
+function startQuiz(){
+    // start  timer 
+    timerId= setInterval(timerFunc, 1000);
+    timerEl.textContent=`TimeLeft: ${timeLeft}`;
+}
