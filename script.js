@@ -1,51 +1,51 @@
 let questions= [
     {
-        question: "question 1", 
+        question: "How many wearable masks can you get in Majora's Mask?", 
         answers: [
-            "answer 1",
-            "answer 2",
-            "answer 3",
-            "answer 4",
+            "12",
+            "24",
+            "32",
+            "3",
         ],
         correctAnswer: "answer 2",
     },
     {
-        question: "question 2", 
+        question: "What is the name of your companion in Twilight Princess?", 
         answers: [
-            "answer 1",
-            "answer 2",
-            "answer 3",
-            "answer 4",
+            "Zelda",
+            "Navi",
+            "Ruto",
+            "Midna",
         ],
         correctAnswer: "answer 4",
     },
     {
-        question: "question 3", 
+        question: "How many medallions do you have to collect in Ocarina of Time?", 
         answers: [
-            "answer 1",
-            "answer 2",
-            "answer 3",
-            "answer 4",
+            "4",
+            "6",
+            "8",
+            "10",
         ],
         correctAnswer: "answer 2",
     },
     {
-        question: "question 4", 
+        question: "What instrument do you use in Wind Waker?", 
         answers: [
-            "answer 1",
-            "answer 2",
-            "answer 3",
-            "answer 4",
+            "Wind Waker",
+            "Ocarina",
+            "Harp",
+            "Violin",
         ],
         correctAnswer: "answer 1",
     },
     {
-        question: "question 5", 
+        question: "What four mechanical constructs did Ganon corrupt in Breath of the Wild?", 
         answers: [
-            "answer 1",
-            "answer 2",
-            "answer 3",
-            "answer 4",
+            "Magical Machines",
+            "Proud Beings",
+            "Divine Beasts",
+            "Wild Warriors",
         ],
         correctAnswer: "answer 3",
     },
@@ -57,15 +57,26 @@ let timerId;
 let timeLeft= 150;
 let currentIndex= 0;
 
-
+let rightWrong = document.getElementById("rightWrong");
 let startButton= document.getElementById("start-btn");
 let timeEl= document.getElementById("time");
 let startDiv= document.getElementById("start-div");
-
+let highscoresDiv= document.getElementById("highscores");
 let questionsDiv= document.getElementById("questions-div");
 let choicesDiv= document.getElementById("choices-div");
 startButton.addEventListener("click", startQuiz);
 choicesDiv.onclick= handleAnswerChoice;
+let userInitials= "";
+let playerScore = 0;
+// let userScores = localStorage.setItem(userInitials, playerScore);
+let player = {
+    "initials" : userInitials, 
+    "score" : playerScore
+};
+
+// let savedPlayer= localStorage.setItem("players", JSON.stringify(player));
+// let savedPlayer= JSON.parse(localStorage.getItem(savedPlayer));
+
 
 function startQuiz(){
     console.log("startQuiz")
@@ -79,7 +90,18 @@ function startQuiz(){
 }
 
 function endQuiz(){
-    // To be completed
+    
+    let userInitials = prompt("Please enter your initials");
+    let playerScore = timeLeft;
+    // let userScores = localStorage.setItem(userInitials, playerScore);
+    let player = {
+        "initials" : userInitials,
+        "score" : playerScore
+    }
+    // console.log(player)
+    renderLastPlayer();
+
+    // return userScores;
 }
 
 function handleAnswerChoice(event){
@@ -98,9 +120,9 @@ function handleAnswerChoice(event){
         }
 
         timeEl.textContent=`TimeLeft: ${timeLeft}`;
-        alert("incorrectAnswer")
+        rightWrong.textContent = "Wrong!"
     } else {
-        alert("correctAnswer")
+        rightWrong.textContent = "Correct!"
     }
     currentIndex++; 
 
@@ -132,5 +154,19 @@ function showQuestion(){
 function timerFunc(){
     timeLeft--;
     timeEl.textContent=`TimeLeft: ${timeLeft}`;
+
+}
+
+function renderLastPlayer() {
+    let savedPlayer = localStorage.getItem(userInitials, playerScore);
+    // console.log(lastPlayer);
+    // let savedPlayer= JSON.parse(localStorage.getItem(savedPlayer));
+    console.log(savedPlayer);
+
+    // highscoresDiv.textContent = playerId + " : " + lastUserScore;
+
+}
+
+function renderHighScores() {
 
 }
