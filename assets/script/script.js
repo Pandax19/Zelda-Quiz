@@ -7,7 +7,7 @@ let questions= [
             "32",
             "3",
         ],
-        correctAnswer: "answer 2",
+        correctAnswer: "24",
     },
     {
         question: "What is the name of your companion in Twilight Princess?", 
@@ -17,7 +17,7 @@ let questions= [
             "Ruto",
             "Midna",
         ],
-        correctAnswer: "answer 4",
+        correctAnswer: "Midna",
     },
     {
         question: "How many medallions do you have to collect in Ocarina of Time?", 
@@ -27,7 +27,7 @@ let questions= [
             "8",
             "10",
         ],
-        correctAnswer: "answer 2",
+        correctAnswer: "6",
     },
     {
         question: "What instrument do you use in Wind Waker?", 
@@ -37,7 +37,7 @@ let questions= [
             "Harp",
             "Violin",
         ],
-        correctAnswer: "answer 1",
+        correctAnswer: "Wind Waker",
     },
     {
         question: "What four mechanical constructs did Ganon corrupt in Breath of the Wild?", 
@@ -47,7 +47,7 @@ let questions= [
             "Divine Beasts",
             "Wild Warriors",
         ],
-        correctAnswer: "answer 3",
+        correctAnswer: "Divine Beasts",
     },
 ];
 
@@ -68,18 +68,18 @@ startButton.addEventListener("click", startQuiz);
 choicesDiv.onclick= handleAnswerChoice;
 let userInitials= "";
 let playerScore = 0;
-// let userScores = localStorage.setItem(userInitials, playerScore);
+let userScores = localStorage.setItem(userInitials, playerScore);
 let player = {
     "initials" : userInitials, 
-    "score" : playerScore
+    "score" : playerScore,
 };
 
 // let savedPlayer= localStorage.setItem("players", JSON.stringify(player));
-// let savedPlayer= JSON.parse(localStorage.getItem(savedPlayer));
+// let savedPlayer= localStorage.getItem(savedPlayer);
 
 
 function startQuiz(){
-    console.log("startQuiz")
+    // console.log("startQuiz")
     // start  timer 
     timerId= setInterval(timerFunc, 1000);
     timeEl.textContent=`TimeLeft: ${timeLeft}`;
@@ -90,44 +90,46 @@ function startQuiz(){
 }
 
 function endQuiz(){
-    
     let userInitials = prompt("Please enter your initials");
     let playerScore = timeLeft;
     // let userScores = localStorage.setItem(userInitials, playerScore);
     let player = {
         "initials" : userInitials,
-        "score" : playerScore
-    }
+        "score" : playerScore,
+    };
     // console.log(player)
-    renderLastPlayer();
+    // renderLastPlayer();
 
     // return userScores;
 }
 
 function handleAnswerChoice(event){
-    console.log ("answerChoice")
+    // console.log ("answerChoice")
     let button= event.target;
 
     if (button.matches("answer")){
         return;
     }
-    console.log ("answerChoice1")
+    // console.log ("answerChoice1")
 
-    if (button.value !== questions[currentIndex].correctAnswer){
+    if (button.value !== questions[currentIndex].correctAnswer){       
+        rightWrong.textContent = "Wrong!"
         timeLeft-= 10;
         if(timeLeft < 0){
             timeLeft = 0;
         }
-
-        timeEl.textContent=`TimeLeft: ${timeLeft}`;
-        rightWrong.textContent = "Wrong!"
     } else {
+
         rightWrong.textContent = "Correct!"
     }
+        
+
     currentIndex++; 
 
+    timeEl.textContent=`TimeLeft: ${timeLeft}`;
+    
     if (timeLeft <= 0 || currentIndex === questions.length){
-        endQuiz();
+        endQuiz()
     } else {
         showQuestion();
     }
@@ -146,6 +148,7 @@ function showQuestion(){
         answerBtn.setAttribute("class", "answer");
         answerBtn.setAttribute("value", answer);
         answerBtn.textContent= i + 1 + " . " + answer;
+     
         choicesDiv.appendChild(answerBtn);
 
     }
@@ -158,10 +161,10 @@ function timerFunc(){
 }
 
 function renderLastPlayer() {
-    let savedPlayer = localStorage.getItem(userInitials, playerScore);
+    player = localStorage.getItem(userInitials, playerScore);
     // console.log(lastPlayer);
     // let savedPlayer= JSON.parse(localStorage.getItem(savedPlayer));
-    console.log(savedPlayer);
+    // console.log(savedPlayer);
 
     // highscoresDiv.textContent = playerId + " : " + lastUserScore;
 
