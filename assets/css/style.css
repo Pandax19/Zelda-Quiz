@@ -4,12 +4,14 @@
 position:absolute;
 top: 12px;
 left: 12px;
+font-size: 24px;
 }
 
 .time {
     position:absolute;
     top: 12px;
     right: 12px;
+    font-size: 24px;
     }
 
 .container {
@@ -25,23 +27,29 @@ left: 12px;
 }
 .choices-div button {
     display: block;
-    
-    
 }
 
 #questions-div {
     padding: 12px;
     border: solid black;
-    background-color: #8a2be2;
-    
+    border-radius: 8px;
+    background-color: rgb(20, 241, 138);
+    font-size: 20px;
 }
 
-#startBtn {
-    
+#start-btn {
+    background-color: black;
+    text-decoration: underline;
+    font-size: 22px;
+    color: white;
+    height: 70px;
+    width: 140px;
+    border-radius: 25px;
 }
 
 p {
-    font-size: 48px;
+    font-size: 36px;
+    padding: 24px;
 }
 
 #question {
@@ -50,10 +58,23 @@ p {
 
 }
 
-.choices-div {
+#choices-div {
+    padding: 24px;
+    margin: 10px;
     
 }
 
+
 .answer {
-    background-color: aqua;
+    height: 80px;
+    width: 120px;
+    border-radius: 15px;
+    background-color: rgb(20, 241, 138);
+}
+
+h1{
+    padding: 12px;
+    font-size: 48px;
+    text-decoration: underline;
+
 }

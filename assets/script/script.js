@@ -68,11 +68,17 @@ startButton.addEventListener("click", startQuiz);
 choicesDiv.onclick= handleAnswerChoice;
 let userInitials= "";
 let playerScore = 0;
-let userScores = localStorage.setItem(userInitials, playerScore);
 let player = {
     "initials" : userInitials, 
     "score" : playerScore,
 };
+
+let userScores = localStorage.setItem("scores", JSON.stringify(player));
+let allPlayerScores = [];
+let storedScores = JSON.parse(localStorage.getItem("scores"));
+if (storedScores !== null){
+    allPlayerScores = storedScores;
+}; 
 
 // let savedPlayer= localStorage.setItem("players", JSON.stringify(player));
 // let savedPlayer= localStorage.getItem(savedPlayer);
@@ -90,18 +96,15 @@ function startQuiz(){
 }
 
 function endQuiz(){
-    let userInitials = prompt("Please enter your initials");
-    let playerScore = timeLeft;
+    player.initials = prompt("Please enter your initials");
+    player.score = timeLeft;
+    localStorage.setItem("scores", JSON.stringify(player));
+    allPlayerScores.push(player)
     // let userScores = localStorage.setItem(userInitials, playerScore);
-    let player = {
-        "initials" : userInitials,
-        "score" : playerScore,
-    };
     // console.log(player)
     // renderLastPlayer();
-
     // return userScores;
-}
+};
 
 function handleAnswerChoice(event){
     // console.log ("answerChoice")
@@ -161,7 +164,7 @@ function timerFunc(){
 }
 
 function renderLastPlayer() {
-    player = localStorage.getItem(userInitials, playerScore);
+    player = localStorage.getItem("player", JSON.parse(playerScore));
     // console.log(lastPlayer);
     // let savedPlayer= JSON.parse(localStorage.getItem(savedPlayer));
     // console.log(savedPlayer);
