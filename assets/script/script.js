@@ -52,7 +52,6 @@ let questions= [
 ];
 
 
-
 let timerId;
 let timeLeft= 150;
 let currentIndex= 0;
@@ -72,7 +71,6 @@ let player = {
     "initials" : userInitials, 
     "score" : playerScore,
 };
-
 
 
 let userScores = localStorage.setItem("scores", JSON.stringify(player));
@@ -137,7 +135,8 @@ function handleAnswerChoice(event){
     timeEl.textContent=`TimeLeft: ${timeLeft}`;
     
     if (timeLeft <= 0 || currentIndex === questions.length){
-        endQuiz()
+        endQuiz();
+        clearInterval(timerId);
     } else {
         showQuestion();
     }
